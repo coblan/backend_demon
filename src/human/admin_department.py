@@ -94,7 +94,7 @@ class DepartmentPage(TablePage):
             for op in ops:
                 if op['name'] =='add_new':
                     op['pre_set'] ='rt={parent_id:scope.search_args.parent} '
-                    op['label'] = '添加下级部门'
+                    op['label'] = '添加部门'
             ops += [
                 {'name':'cut','label':'剪切','editor':'com-op-btn','row_match':'many_row','action':'if(scope.ps.check_selected(scope.head)){scope.ps.catch_rows = scope.ps.selected;cfg.toast("剪切成功，请选择部门，再粘贴")}'},
                 {'name':'paste','label':'粘贴','editor':'com-op-btn','action':''' (function(){ if(!scope.ps.catch_rows){cfg.showMsg("请先选中并剪切一些部门"); return;}
