@@ -27,12 +27,12 @@ class PcMenu(BaseEngine):
         menu = [
             #{'label': 'HOME', 'url': page('home'), 'icon': fa('fa-home'), 'visible': True},
          
-            {'label': '机构管理', 'icon': fa('fa-truck'), 'visible': True,
+            {'label': '机构管理', 'icon': fa('fa-users'), 'visible': True,
              'submenu': [
                 {'label':'人员', 'url': page('employee'), },
                 {'label':'部门', 'url': page('department'), },
              ]},
-            {'label':'色彩图片','icon':fa('fa-truck'),
+            {'label':'色彩图片','icon':fa('fa-dashboard'),
              'submenu':[
                  {'label':'单色调色板','url':page('palette')},
                  {'label':'渐变调色板','url':page('gradual')},
