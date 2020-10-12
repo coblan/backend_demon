@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^pc/([\w\.]+)/?$',PcMenu.as_view(),name=PcMenu.url_name),
     url(r'^dapi/(?P<director_name>[\w\/\.-]+)?/?$',director_view),
     url(r'^d/',include('helpers.director.urls'),name='director'),
-    url(r'^$',RedirectView.as_view(url='/pc/employee')) ,
+    url(r'^$',RedirectView.as_view(url='/pc/enginhome')) ,
 ]
 
 if settings.DEBUG:

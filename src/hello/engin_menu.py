@@ -16,7 +16,7 @@ from helpers.director.access.permit import has_permit
 class PcMenu(BaseEngine):
     url_name = 'enterprise'
     title = '后台演示' 
-    brand = '后台演示' 
+    brand = 'x' 
     mini_brand = 'XCL'
     menu_search=False
     need_staff=True
@@ -26,7 +26,7 @@ class PcMenu(BaseEngine):
         crt_user = self.request.user
         menu = [
             #{'label': 'HOME', 'url': page('home'), 'icon': fa('fa-home'), 'visible': True},
-         
+            {'label': 'HOME', 'url': page('enginhome'), 'icon': fa('fa-home'), 'visible': True},
             {'label': '机构管理', 'icon': fa('fa-users'), 'visible': True,
              'submenu': [
                 {'label':'人员', 'url': page('employee'), },
@@ -36,8 +36,8 @@ class PcMenu(BaseEngine):
              'submenu':[
                  {'label':'单色调色板','url':page('palette')},
                  {'label':'渐变调色板','url':page('gradual')},
-                 {'label':'图片管理','url':page('image')},
-                 {'label':'图片集','url':page('imagegroup_grid')}
+                 {'label':'图片','url':page('image')},
+                 {'label':'图片组','url':page('imagegroup_grid')}
                  ]},
 
             

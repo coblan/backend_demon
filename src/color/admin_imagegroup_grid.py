@@ -5,7 +5,7 @@ from helpers.director.model_func.dictfy import sim_dict
 
 class ImageGroupPage(TablePage):
     def get_label(self):
-        return '网格化图片'
+        return '图片组'
     
     def get_template(self, prefer=None):
         return 'jb_admin/live.html'

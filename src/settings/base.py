@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'helpers.authuser',
     'hello',
     'human',
-    'color'
+    'color',
+    'chart',
 ]
 
 MIDDLEWARE = [
