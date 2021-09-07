@@ -1,14 +1,14 @@
 
 
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" lang="zh-CN" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="zh-CN" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>1. 演示后台 &mdash; 后台演示 1 documentation</title>
+  <title>1. 演示后台 &mdash; 后台演示 1 文档</title>
   
 
   
@@ -26,8 +26,9 @@
 
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/coblan/static@b38dd63314ae03594a4cd944b886c97380001c8f/sphinx/custom.css" type="text/css" />
+    <link rel="index" title="索引" href="genindex.html" />
+    <link rel="search" title="搜索" href="search.html" />
     <link rel="next" title="2. 部门管理" href="department.html" />
     <link rel="prev" title="演示后台" href="index.html" /> 
 
@@ -78,10 +79,10 @@
               
             
             
-              <p class="caption"><span class="caption-text">Contents:</span></p>
-<ul class="current">
+              <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">1. 演示后台</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id2">1.1. 界面</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">1.1. 开发方式及特点</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">1.2. 管理界面</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="department.html">2. 部门管理</a></li>
@@ -151,9 +152,30 @@
            <div itemprop="articleBody">
             
   <div class="section" id="id1">
-<h1>1. 演示后台<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1>1. 演示后台<a class="headerlink" href="#id1" title="永久链接至标题">¶</a></h1>
+<p>我们提供定制化的<strong>管理后台</strong>开发服务，重点是BS架构的软件开发。<em>B:Brower浏览器;S:server远程服务器</em></p>
+<p>普通的管理后台大致包括后端<code class="docutils literal notranslate"><span class="pre">数据处理逻辑</span></code>及其前端<code class="docutils literal notranslate"><span class="pre">管理界面</span></code>以及面向app等前端<code class="docutils literal notranslate"><span class="pre">api接口</span></code>。
+在本系统中(本演示后台)用于演示目的，只关注<strong>管理界面以及相应数据处理逻辑</strong>，我们通过几个小的模块，向您大致演示下系统的基本功能。</p>
 <div class="section" id="id2">
-<h2>1.1. 界面<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2>1.1. 开发方式及特点<a class="headerlink" href="#id2" title="永久链接至标题">¶</a></h2>
+<p>我们开发目标是<strong>中小型管理后台</strong>，我们的开发架构采用，后端<code class="docutils literal notranslate"><span class="pre">python/django</span></code>,前端<code class="docutils literal notranslate"><span class="pre">vue.js</span></code>的形式。<code class="docutils literal notranslate"><span class="pre">python</span></code>是非常优秀和流行的动态语言，语法简单，维护方便，除了现在流行的AI应用外，还被大量应用在web后端开发中。<code class="docutils literal notranslate"><span class="pre">django</span></code>作为<code class="docutils literal notranslate"><span class="pre">python</span></code>web生态最重要的框架，提供的<code class="docutils literal notranslate"><span class="pre">orm</span></code>数据库组件极其优秀，能够自动管理和映射数据库表。大大简化和加速了开发过程。<code class="docutils literal notranslate"><span class="pre">vue.js</span></code>是当前最流行的前端组件化框架，其简单实用，运行效率高。利用<code class="docutils literal notranslate"><span class="pre">vue.js</span></code>将前端完全组件化后，可以配合后端<code class="docutils literal notranslate"><span class="pre">ORM</span></code>根据数据库结构自动组织管理界面，可以达到无与伦比的开发效率。此外带来了功能强大，但是结构简洁的<strong>权限</strong>系统。
+此外，由于多年的工作以及个人兴趣，我们累积了大量的实践经验，完全可控的基于django的<code class="docutils literal notranslate"><span class="pre">开发框架</span></code>，可以做到灵活快速的响应客户不断变化的需求。</p>
+<p>对于BS架构的软件，一般团队是分成两拨人进行开发。后端人员负责后端数据的处理（如存储于查询），并且向前端提供接口。前端人员复杂编写界面，展示数据，提供表单编辑数据。这种方式称为<em>前后端分离</em>的开发方式，较为通用，适合招聘对口人才，对于<strong>大型项目</strong>，需要多人协作，基本都采用前后端分离的方式。但是需要前后端协商沟通，开发效率并不高，软件排错和修改也比较麻烦。</p>
+<p>普通<strong>中小型</strong>项目，往往有以下几个特点:</p>
+<ul class="simple">
+<li>用户往往并不清楚自己想要的效果，在项目开发过程中，需求会不断发生变化。</li>
+<li>投入资源有限，开发人员少。</li>
+</ul>
+<p>不断变化的需求，必然造成其后台开发面临着无数次的修改。项目也从一些模糊抽象的理念一点点蜕变为具体的实体软件。这个雕琢的过程会带来大量<em>无中生有</em>的工作量，一旦超过开发人员的能力限度，会造成代码失控。一旦代码失控，开发人员将会放之任之，交差了事。对后期的继续开发和维护造成极大隐患。</p>
+<p>在中小项目中，参与的人员少，沟通成本较低。开发人员独立性强，非常适合使用灵活性高的动态语言。<code class="docutils literal notranslate"><span class="pre">python</span></code>的使用增加了开发人员对代码的控制力。以前5个人写的业务，现在1个人就能搞定。而<code class="docutils literal notranslate"><span class="pre">python</span></code>过于灵活，代码约束少，难于检查的弱点，刚好在中小型项目中得到了缓解。</p>
+<p>总之，我们具备丰富的<strong>中小型管理后台</strong>开发经验，能够快速的响应用户需求变更，以及长期维护的需求。</p>
+<div class="admonition note">
+<p class="first admonition-title">注解</p>
+<p class="last">很多团队不管项目的规模大小，一概采用前后端分离的开发模式，造成他们的开发成本非常高。当vue.js这类前端组件化框架成熟后，使得我们团队能够进化出更加高效的开发方式，使用非前后端分离的方式开发中小型项目。</p>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>1.2. 管理界面<a class="headerlink" href="#id3" title="永久链接至标题">¶</a></h2>
 <p>后台的界面如下</p>
 <p><img alt="Image" src="_images/jt.jpg" /></p>
 <ol class="simple">
@@ -163,10 +185,6 @@
 <li>功能按钮区，包含该页面支持的各种操作.</li>
 <li>数据区域。蓝色的列一般代表可以点击。</li>
 </ol>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">要搜索数据，需要在页面 <cite>过滤器区域</cite> 进行数据筛选。主菜单区域的搜索框，只能搜索菜单项。</p>
-</div>
 </div>
 </div>
 
@@ -216,6 +234,8 @@
         <script type="text/javascript" src="_static/underscore.js"></script>
         <script type="text/javascript" src="_static/doctools.js"></script>
         <script type="text/javascript" src="_static/language_data.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/coblan/static@b38dd63314ae03594a4cd944b886c97380001c8f/sphinx/custom.js?hide_index=/doc/,index.html,index.html#&real_index=hello.html"></script>
+        <script type="text/javascript" src="_static/translations.js"></script>
     
 
   

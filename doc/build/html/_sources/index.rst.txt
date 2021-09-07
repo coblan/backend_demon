@@ -6,11 +6,11 @@
 演示后台
 =================================
 
-主要为了演示一些后台的功能
+.. :caption: 目录:
+
 
 .. toctree::
    :maxdepth: 2
-   :caption: Contents:
    :numbered: 3
 
    hello.md

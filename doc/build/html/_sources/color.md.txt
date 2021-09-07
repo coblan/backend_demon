@@ -20,4 +20,3 @@
 
 ![Image](_static/color_edit.jpg)
 
-
