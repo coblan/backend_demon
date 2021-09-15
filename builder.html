@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)http://www.enjoyst.com/static/builder.html -->
+<html lang="zh-CN" ng-app="share"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<script src="./builder_files/jquery.min.js.下载"></script>
+        <script src="./builder_files/bootstrap.min.js.下载"></script>
+        <link rel="stylesheet" href="./builder_files/bootstrap.min.css">
+
+		<!--<script src="//cdn.bootcss.com/vue/1.0.24/vue.min.js"></script>-->
+		<script src="./builder_files/vue.js.下载"></script>
+
+	<script type="text/javascript">
+		function clear_sel() {
+			if (window.getSelection) {
+			  if (window.getSelection().empty) {  // Chrome
+			    window.getSelection().empty();
+			  } else if (window.getSelection().removeAllRanges) {  // Firefox
+			    window.getSelection().removeAllRanges();
+			  }
+			} else if (document.selection) {  // IE?
+			  document.selection.empty();
+			}
+		}
+		function array_remove(array,item) {
+			if(array ){
+				var idx = array.indexOf(item)
+				if(idx!=-1){
+					array.splice(idx,1)
+				}
+			}
+		}
+		function array_insert(array,idx,item) {
+			if(array){
+				array.splice(idx,0,item)
+			}
+		}
+		function array_move(array,item,to_idx) {
+			var old_idx=array.indexOf(item)
+			if(old_idx!=-1){
+				if(old_idx<to_idx){
+					to_idx+=1
+					array.splice(to_idx,0,item)
+					array.splice(old_idx,1)
+				}else{
+					array.splice(old_idx,1)
+					array.splice(to_idx,0,item)
+				}
+			} else{
+				array.splice(to_idx,0,item)
+			}
+		}
+		function array_replace(array,src,dst) {
+			var idx = array.indexOf(src)
+			if(idx!=-1){
+				array.splice(idx,1)
+				array.splice(idx,0,dst)
+			}
+		}
+		//@mouseup='onmouseup($event)'
+		
+		drag_mix={
+			compiled:function () {
+						//$('#tail').hide()
+					var self =this
+					$(document).bind('mousemove', function(e){
+						self.x=e.clientX //pageX
+						self.y=e.clientY //pageY
+						self.drag_engin(e.pageX, e.pageY)
+						if(self.is_drag){
+							e.preventDefault()
+						}
+					}).bind('mouseup',function (e) {
+						self.is_down=false
+						if(self.is_drag){
+							self._drag_end()
+							e.preventDefault()
+						}
+					})
+					$(window).scroll(function (e) {
+						self.drag_engin(self.x+$(document).scrollLeft(),self.y+$(document).scrollTop())
+					})
+			},
+			data:{
+				moveing_block:{},
+			},
+			methods:{
+				drag_engin:function (x,y) {
+					if(!this.is_drag &&this.is_down ){
+						var del_x = x-this.last_start_x
+						var del_y = y-this.last_start_y
+						if(Math.sqrt(del_x*del_x+del_y*del_y) > 10){
+							this._drag_start()
+						}
+					}
+					if(this.is_drag){
+						this.drag(x,y)
+					}
+				},
+				_drag_start:function () {
+					this.is_drag=true
+					this.face.show()
+					$('body').css('cursor','move')
+					this.drag_start()
+				},
+				drag:function (x,y) {	
+						clear_sel()		
+						this.face.css({
+						       left:  x -this.det_x,
+						       top:   y -this.det_y,
+						    });
+					},
+				_drag_end:function () {
+						this.drag_end()
+						this.is_drag=false;
+						this.face.hide()
+						this.moveing_block={}
+						$('body').css('cursor','auto')
+					},
+				onmousedown:function (ev){
+						this.is_down=true
+						//this.face=face
+						this.last_start_x= ev.pageX
+						this.last_start_y= ev.pageY
+						var div_x = $(ev.target).offset().left
+						var div_y= $(ev.target).offset().top
+						this.det_x = ev.pageX - div_x
+						this.det_y = ev.pageY - div_y
+						//this.catch_block= block
+					},
+				//onmouseup:function (ev) {
+				//		this.is_down=false
+				//	},
+			}
+		}
+		
+		$(function () {
+			//det_x = 0
+			//det_y = 0
+			
+			vm =new Vue({
+				el:'#content',
+				data:{
+					hello:'hello world',
+					//is_drag:false,
+					blocks:[{label:'aaaaaa',color:'white'},
+							{label:'bbbbbb',color:'white'},
+							{label:'cccccc',color:'white'},
+							{label:'dddddd',color:'white'},
+							{label:'eeeeee',color:'white'},
+							{label:'fffff',color:'white'},
+							{label:'gggggg',color:'white'},
+							{label:'hhhhh',color:'white'},
+							{label:'iiiiiii',color:'white'},
+							],
+					view_style:{
+						marginLeft:'20px',
+						float:'left',
+						minHeight:'500px',
+						backgroundColor:'pink'
+					},
+					li_style:{
+						width:'400px',
+						margin:'10px'
+					},
+					
+					virtual:{label:'',color:'yellow'},
+					
+				},
+				mixins:[drag_mix],
+				methods:{
+					onmouseenter:function (idx,ev){
+						if(this.is_drag){
+							array_move(this.blocks,this.virtual,idx)
+							ev.preventDefault();
+						}
+					},
+					ulleave:function () {
+						array_remove(this.blocks,this.virtual)
+					},
+					onmousedown:function (ev,block) {
+						drag_mix.methods.onmousedown.call(this,ev)
+						this.moveing_block = block
+						this.face = $('#tail')
+						this.drag_start=function () {
+							array_replace(this.blocks,this.moveing_block,this.virtual)
+						}
+						this.drag_end=function () {
+							console.log('jjj yyyy')
+							array_replace(this.blocks,this.virtual,this.moveing_block)
+						}
+					},
+					divmousedown:function (ev,block) {
+						drag_mix.methods.onmousedown.call(this,ev)
+						this.moveing_block=block
+						this.face=$('#yy')
+						this.drag_start=function () {
+							$('#hyy').hide()
+							//this.moveing_block=block
+							//array_replace(this.blocks,this.moveing_block,this.virtual)
+						}
+						this.drag_end=function () {
+							array_replace(this.blocks,this.virtual,{label:'fffff',color:'red'})
+							$('#hyy').show()
+							//array_remove(this.blocks,this.virtual)
+							//array_replace(this.blocks,this.virtual,this.moveing_block)
+						}
+					}
+				}
+			})
+	})
+
+</script>
+<style type="text/css" media="screen" id="test">
+	#tail,#yy{
+	    position: absolute;
+	    float: left;
+	    pointer-events:none;
+	    transform:rotate(1deg);
+	    display: none;
+	}
+	#yy{
+		background-color: red;
+	}
+</style>
+</head>
+	<body style="cursor: auto;">
+		<!--<div id="tail">mouse tail</div>-->
+		<div id="content">
+			<div id="view" style="margin-left: 20px; float: left; min-height: 500px; background-color: pink;">
+				<ul id="dog">
+
+					<li style="width: 400px; margin: 10px;">
+						<div style="height: 100px; background-color: white;">
+							<span>bbbbbb</span>
+							<a href="http://www.enjoyst.com/static/www.qq.com">ss</a>
+						</div>
+					</li><li style="width: 400px; margin: 10px;">
+						<div style="height: 100px; background-color: white;">
+							<span>aaaaaa</span>
+							<a href="http://www.enjoyst.com/static/www.qq.com">ss</a>
+						</div>
+					</li><li style="width: 400px; margin: 10px;">
+						<div style="height: 100px; background-color: white;">
+							<span>cccccc</span>
+							<a href="http://www.enjoyst.com/static/www.qq.com">ss</a>
+						</div>
+					</li><li style="width: 400px; margin: 10px;">
+						<div style="height: 100px; background-color: white;">
+							<span>dddddd</span>
+							<a href="http://www.enjoyst.com/static/www.qq.com">ss</a>
+						</div>
+					</li><li style="width: 400px; margin: 10px;">
+						<div style="height: 100px; background-color: white;">
+							<span>fffff</span>
+							<a href="http://www.enjoyst.com/static/www.qq.com">ss</a>
+						</div>
+					</li><li style="width: 400px; margin: 10px;">
+						<div style="height: 100px; background-color: white;">
+							<span>eeeeee</span>
+							<a href="http://www.enjoyst.com/static/www.qq.com">ss</a>
+						</div>
+					</li><li style="width: 400px; margin: 10px;">
+						<div style="height: 100px; background-color: white;">
+							<span>gggggg</span>
+							<a href="http://www.enjoyst.com/static/www.qq.com">ss</a>
+						</div>
+					</li><li style="width: 400px; margin: 10px;">
+						<div style="height: 100px; background-color: white;">
+							<span>hhhhh</span>
+							<a href="http://www.enjoyst.com/static/www.qq.com">ss</a>
+						</div>
+					</li><li style="width: 400px; margin: 10px;">
+						<div style="height: 100px; background-color: white;">
+							<span>iiiiiii</span>
+							<a href="http://www.enjoyst.com/static/www.qq.com">ss</a>
+						</div>
+					</li>
+					<li id="tail" style="width: 400px; margin: 10px; display: none; left: 98px; top: 494px;">
+						<div style="height: 100px; border: 1px solid rgb(153, 153, 153);">
+							<span></span>
+						</div>
+					</li>
+
+				</ul>
+			</div>
+
+			<div id="control">
+				<input type="text" name="test">
+				<ul style="float:left;" id="hyy">
+					<li>hello world</li>
+				</ul>
+				<span id="yy">[object Object]</span>
+			</div>
+		</div>
+		
+		
+	
+	
+</body></html>

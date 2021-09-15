@@ -39,7 +39,8 @@ class PcMenu(BaseEngine):
                  {'label':'图片','url':page('image')},
                  {'label':'图片组','url':page('imagegroup_grid')}
                  ]},
-
+            
+            {'label':'构建器','url':page('blockeditor'),'icon': fa('fa-users')},
             
             {'label': '系统管理', 'icon': fa('fa-gear'), 'visible': True,
              'submenu': [
