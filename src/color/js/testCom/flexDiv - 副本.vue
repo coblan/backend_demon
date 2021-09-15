@@ -2,25 +2,13 @@
 <!--  <div class="flex-div" @drop="drop_handler" @dragenter="drag_enter" @dragover.prevent @dragleave="drag_leave">-->
   <div>
     flex-div {{name}}
-    <draggable :list="com_list"
-               :disabled="false"
-               class="list-group"
-               ghost-class="ghost"
-               :move="checkMove"
-               @start="dragging = true"
-               @end="dragging = false">
-      <component :is="item.editor" v-for="item in com_list"></component>
-    </draggable>
+    <component :is="item.editor" v-for="item in com_list"></component>
+    <component  class="fake-com" v-if="next_com" :is="next_com.editor" key="__next_com"></component>
   </div>
 </template>
 <script>
-import draggable from "vuedraggable";
-
 var count =1
 export  default  {
-  components:{
-    draggable
-  },
   data(){
     count +=1
     return {

@@ -19,13 +19,6 @@
         @end="dragging = false"
     >
       <component :is="item.editor" v-for="(item,index) in com_list" :key="index"></component>
-<!--      <div-->
-<!--          class="list-group-item"-->
-<!--          v-for="element in com_list"-->
-<!--          :key="element.name"-->
-<!--      >-->
-<!--        {{ element.name }}-->
-<!--      </div>-->
     </draggable>
   </div>
 </template>
