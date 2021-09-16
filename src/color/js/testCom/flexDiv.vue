@@ -1,22 +1,30 @@
 <template>
-<!--  <div class="flex-div" @drop="drop_handler" @dragenter="drag_enter" @dragover.prevent @dragleave="drag_leave">-->
-  <div>
-    flex-div {{name}}
-    <draggable :list="com_list"
-               :disabled="false"
-               class="list-group"
-               ghost-class="ghost"
-               :move="checkMove"
-               @start="dragging = true"
-               @end="dragging = false">
-      <component :is="item.editor" v-for="item in com_list"></component>
+  <div class="flex-div">
+    <div>flex Dive {{name}}</div>
+    <button @click="open_config">日</button>
+    <draggable
+        :list="com_list"
+        :disabled="false"
+        class="list-group"
+        ghost-class="ghost"
+        group="editor"
+        @start="dragging = true"
+        @end="dragging = false"
+    >
+      <componet :is="item.editor" v-for="item in com_list" :ctx="item" :key="item.index"></componet>
+      <!--      <div-->
+      <!--          class="list-group-item"-->
+      <!--          v-for="element in list"-->
+      <!--          :key="element.name"-->
+      <!--      >-->
+      <!--        {{ element.name }}-->
+      <!--      </div>-->
     </draggable>
   </div>
 </template>
 <script>
-import draggable from "vuedraggable";
-
-var count =1
+import draggable from "vuedraggable"
+let count = 1
 export  default  {
   components:{
     draggable
@@ -24,48 +32,23 @@ export  default  {
   data(){
     count +=1
     return {
-      com_list:[],
-      next_com:{},
-      name:count
+      name:count,
+      com_list:[]
     }
   },
   methods:{
-    drop_handler(ev) {
-      ev.preventDefault();
-      var data = ev.dataTransfer.getData('Text')
-      this.com_list.push((JSON.parse(data)))
-      this.next_com ={}
-      window._drag_data ={}
-      ev.stopPropagation()
-    },
-    drag_enter(ev){
-      console.log('enter')
-      ev.preventDefault();
-      // ev.stopPropagation()
-      // if(window._drag_data){
-      //   this.next_com = window._drag_data
-      // }
-
-    },
-    drag_over(ev){
-      ev.preventDefault();
-      ev.stopPropagation()
-      console.log('ff over')
-    },
-    drag_leave(ev){
-      this.next_com ={}
-      ev.preventDefault();
-    },
+    open_config(){
+      alert('mimi')
+    }
   }
 }
 </script>
 <style scoped lang="scss">
 .flex-div{
-  display: flex;
-  border: 1px solid #e8e6e6;
-  min-height: 50px;
+  border: 1px solid #c9c8c8;
+  .list-group{
+    display: flex;
+    flex-direction: row;
+  }
 }
-//.fake-com{
-//  pointer-events: none;
-//}
 </style>

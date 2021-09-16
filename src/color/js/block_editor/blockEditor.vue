@@ -4,34 +4,35 @@
 <!--      <treeBar></treeBar>-->
       <comPannel></comPannel>
     </div>
-    <div class="block-content" @drop="drop_handler" @dragenter="drag_enter" @dragover.prevent @dragleave="drag_leave">
-        <component :is="item.editor" v-for="(item,index) in com_list" :key="item.name"></component>
+    <div class="block-content" >
 
-        <component  class="bbc" v-if="next_com" :is="next_com.editor" key="__next_com"></component>
+<!--        <flexDiv></flexDiv>-->
+
+      <draggable
+          :list="com_list"
+          :disabled="false"
+          class="list-group"
+          ghost-class="ghost"
+          group="container"
+          @start="dragging = true"
+          @end="dragging = false"
+      >
+        <componet :is="item.editor" v-for="item in com_list" :key="item.index"></componet>
+      </draggable>
     </div>
-    <draggable
-        :list="com_list"
-        :disabled="false"
-        class="list-group"
-        ghost-class="ghost"
-        :move="checkMove"
-        @start="dragging = true"
-        @end="dragging = false"
-    >
-      <component :is="item.editor" v-for="(item,index) in com_list" :key="index"></component>
-    </draggable>
   </div>
 </template>
 <script>
-import  treeBar from './treeBar.vue'
+// import  treeBar from './treeBar.vue'
 import  comPannel from './comPannel.vue'
-import draggable from "vuedraggable";
+import flexDiv from "../testCom/flexDiv.vue";
 
 export  default  {
   components:{
-    treeBar,
+    // treeBar,
     comPannel,
-    draggable
+    // draggable,
+    flexDiv
   },
   data(){
     return {
