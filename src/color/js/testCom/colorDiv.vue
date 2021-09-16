@@ -46,7 +46,7 @@ export  default  {
         genVc:self
       }
       // cfg.pop_vue_com('com-local-form',fields_ctx)
-      cfg.pop_vue_com('com-form-one',fields_ctx)
+      cfg.pop_vue_com('com-form-one',fields_ctx,{shade:0,maxmin: true,})
     },
     save_row(row){
       ex.vueAssign(this.ctx.row,row)
