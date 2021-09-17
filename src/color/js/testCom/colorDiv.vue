@@ -1,6 +1,6 @@
 <template>
   <div class="color-div" :style="mystyle">
-    <button @click="config_com">color</button>
+    <button @click="config_com" v-if="!parStore.vc.is_prod">color</button>
   </div>
 </template>
 <script>
@@ -17,7 +17,7 @@ export  default  {
     }
 
     return {
-
+      parStore: ex.vueParStore(this)
     }
   },
   computed:{
@@ -43,10 +43,11 @@ export  default  {
           {'editor':'com-btn','label':'确定','click_express':'scope.ps.vc.ctx.genVc.save_row(scope.ps.vc.row);scope.ps.vc.$emit("finish")'}
         ],
         ops_loc:'bottom',
-        genVc:self
+        genVc:self,
+        title:'colorDiv'
       }
       // cfg.pop_vue_com('com-local-form',fields_ctx)
-      cfg.pop_vue_com('com-form-one',fields_ctx,{shade:0,maxmin: true,})
+      cfg.pop_vue_com('com-form-one',fields_ctx,{shade:0,maxmin: true,offset:'rt',area:['500px','500px']})
     },
     save_row(row){
       ex.vueAssign(this.ctx.row,row)

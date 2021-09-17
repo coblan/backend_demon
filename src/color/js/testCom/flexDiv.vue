@@ -1,44 +1,41 @@
 <template>
   <div class="flex-div">
-    <div>flex Dive {{name}}</div>
-    <button @click="open_config">日</button>
-    <draggable
-        :list="com_list"
+    <button @click="open_config" v-if="!parStore.vc.is_prod">flex Dive {{name}}</button>
+    <draggable v-if="! parStore.vc.is_prod"
+        :list="ctx.com_list"
         :disabled="false"
         class="list-group"
         ghost-class="ghost"
-        group="editor"
+        group="flexPannel"
         @start="dragging = true"
         @end="dragging = false"
     >
-      <componet :is="item.editor" v-for="item in com_list" :ctx="item" :key="item.index"></componet>
-      <!--      <div-->
-      <!--          class="list-group-item"-->
-      <!--          v-for="element in list"-->
-      <!--          :key="element.name"-->
-      <!--      >-->
-      <!--        {{ element.name }}-->
-      <!--      </div>-->
+      <componet :is="item.editor" v-for="item in ctx.com_list" :ctx="item" :key="item.index"></componet>
     </draggable>
+    <div class="list-group" v-else>
+      <componet :is="item.editor" v-for="item in ctx.com_list" :ctx="item" :key="item.index"></componet>
+    </div>
   </div>
 </template>
 <script>
 import draggable from "vuedraggable"
-let count = 1
+import flexPannel from "./flexPannel.vue";
+
 export  default  {
+  props:['ctx'],
   components:{
     draggable
   },
   data(){
-    count +=1
+    var parStore = ex.vueParStore(this)
     return {
-      name:count,
-      com_list:[]
+      name:this.ctx.index,
+      parStore:parStore,
     }
   },
   methods:{
     open_config(){
-      alert('mimi')
+      cfg.pop_vue_com(flexPannel,{genVc:this},{shade:0,maxmin: true,offset:'rt',area:['500px','500px']})
     }
   }
 }

@@ -9,3 +9,5 @@ from . import admin_imagegroup
 from . import admin_tag
 
 from . import js_cfg
+
+from . import admin_dev_block_editor

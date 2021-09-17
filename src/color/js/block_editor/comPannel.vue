@@ -33,23 +33,24 @@
   </div>
 </template>
 <script>
-let count =1
 export  default  {
   data(){
     return {
+      parStore:ex.vueParStore(this),
       container_list:[
-        {'editor':'block-flexDiv','label':'FlexDiv',},
+        {'editor':'block-flexDiv','label':'FlexDiv','com_list':[]},
+        {'editor':'block-leftImageInfoContainer','label':'block-leftImageInfoContainer','com_list':[]},
       ],
       editor_list:[
-        {'editor':'block-colorDiv','label':'colorDiv',row:{}}
+
       ]
     }
   },
   methods:{
     cloneDog(node){
-      count +=1
+      this.parStore.count +=1
       var node1= ex.copy(node)
-      node1.index=count
+      node1.index= this.parStore.count
       return node1
     }
   }
