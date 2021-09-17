@@ -18,10 +18,10 @@
   </div>
 </template>
 <script>
-let count =1
 export  default  {
   props:['ctx'],
   data(){
+
     return {
       com_list:[
         {'editor':'block-leftImageInfo','label':'block-leftImageInfo',},
@@ -30,18 +30,29 @@ export  default  {
         heads:[
           {'name':'data_src','label':'数据源','editor':'com-field-linetext'},
         ],
-        row:{
-          data_src:this.ctx.data_src,
-        },
+        row:this.ctx.row,
+        ops:[
+          {'editor':'com-btn','label':'获取数据','click_express':'scope.ps.vc.$parent.getData(scope.ps.vc.row)'},
+          {'editor':'com-btn','label':'删除','click_express':'scope.ps.vc.$parent.ctx.genVc.removeSelf()'},
+          {'editor':'com-btn','label':'确定','click_express':'debugger;scope.ps.vc.$parent.ctx.genVc.save_row(scope.ps.vc.row);scope.ps.vc.$emit("finish")'}
+
+        ],
       }
     }
   },
   methods:{
     cloneDog(node){
-      count +=1
+      this.ctx.genVc.parStore.count +=1
       var node1= ex.copy(node)
-      node1.index=count
+      node1.index= this.ctx.genVc.parStore.count
       return node1
+    },
+    getData(row){
+      cfg.show_load()
+      ex.director_call('get_today_info',{}).then(resp=>{
+        row.data_resp = resp
+        cfg.hide_load()
+      })
     }
   }
 }

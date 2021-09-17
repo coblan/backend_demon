@@ -10,6 +10,7 @@
           class="list-group-item"
           v-for="element in container_list"
           :key="element.editor"
+          :ctx="element"
       >
         {{ element.label }}
       </div>
@@ -39,11 +40,10 @@ export  default  {
       parStore:ex.vueParStore(this),
       container_list:[
         {'editor':'block-flexDiv','label':'FlexDiv','com_list':[]},
-        {'editor':'block-leftImageInfoContainer','label':'block-leftImageInfoContainer','com_list':[]},
+        {'editor':'block-leftImageInfoContainer','label':'block-leftImageInfoContainer',
+          'com_list':[],'row':{}},
       ],
-      editor_list:[
-
-      ]
+      editor_list:[]
     }
   },
   methods:{
@@ -52,7 +52,8 @@ export  default  {
       var node1= ex.copy(node)
       node1.index= this.parStore.count
       return node1
-    }
+    },
+
   }
 }
 </script>

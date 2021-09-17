@@ -12,17 +12,23 @@
 </template>
 <script>
 import leftImageInfoPannel from "./leftImageInfoPannel.vue";
-let count =1
 export  default  {
   props:['ctx'],
   data(){
     return {
+      parStore:ex.vueParStore(this)
       // com_list:[ ],
     }
   },
   methods:{
     open_drag(){
-      cfg.pop_vue_com(leftImageInfoPannel,{},{shade:0,maxmin: true,offset:'rt',area:['500px','500px']})
+      cfg.pop_vue_com(leftImageInfoPannel,{genVc:this,row:this.ctx.row},{shade:0,maxmin: true,offset:'rt',area:['500px','500px']})
+    },
+    save_row(row){
+      ex.vueAssign(this.ctx.row,row)
+    },
+    removeSelf(){
+      this.parStore.vc.removeChildren(this.ctx.index)
     }
   }
 }
