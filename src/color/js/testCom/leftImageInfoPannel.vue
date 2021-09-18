@@ -24,17 +24,17 @@ export  default  {
 
     return {
       com_list:[
-        {'editor':'block-leftImageInfo','label':'block-leftImageInfo',},
+        {'editor':'block-leftImageInfo','label':'block-leftImageInfo',lay_row:{}},
       ],
       fields_ctx:{
         heads:[
           {'name':'data_src','label':'数据源','editor':'com-field-linetext'},
         ],
-        row:this.ctx.row,
+        row:this.ctx.lay_row,
         ops:[
           {'editor':'com-btn','label':'获取数据','click_express':'scope.ps.vc.$parent.getData(scope.ps.vc.row)'},
           {'editor':'com-btn','label':'删除','click_express':'scope.ps.vc.$parent.ctx.genVc.removeSelf()'},
-          {'editor':'com-btn','label':'确定','click_express':'debugger;scope.ps.vc.$parent.ctx.genVc.save_row(scope.ps.vc.row);scope.ps.vc.$emit("finish")'}
+          {'editor':'com-btn','label':'确定','click_express':'scope.ps.vc.$parent.ctx.genVc.save_row(scope.ps.vc.row);scope.ps.vc.$parent.$emit("finish")'}
 
         ],
       }

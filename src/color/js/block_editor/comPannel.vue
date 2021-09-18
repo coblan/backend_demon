@@ -41,7 +41,7 @@ export  default  {
       container_list:[
         {'editor':'block-flexDiv','label':'FlexDiv','com_list':[]},
         {'editor':'block-leftImageInfoContainer','label':'block-leftImageInfoContainer',
-          'com_list':[],'row':{}},
+          'com_list':[],lay_row:{}},
       ],
       editor_list:[]
     }
