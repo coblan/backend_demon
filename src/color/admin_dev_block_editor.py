@@ -13,5 +13,5 @@ def get_test_com_list():
 def get_today_info():
     return {
         'sheep':100,
-        'chicken':200,
+        'chicken':300,
     }

@@ -42,9 +42,9 @@ export  default  {
   },
   methods:{
     cloneDog(node){
-      this.ctx.genVc.parStore.count +=1
+      this.ctx.genVc.blockEditorStore.count +=1
       var node1= ex.copy(node)
-      node1.index= this.ctx.genVc.parStore.count
+      node1.index= this.ctx.genVc.blockEditorStore.count
       return node1
     },
     getData(row){

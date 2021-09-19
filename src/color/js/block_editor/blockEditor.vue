@@ -41,6 +41,7 @@ export  default  {
     var childStore = new Vue()
     childStore.vc = this
     childStore.count =1
+    childStore.name='blockEditorStore'
     return {
       com_list:[],
       is_prod:false,

@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <button @click="open_drag">block-leftImageInfoContainer</button>
+  <div >
+    <button @click="open_drag" v-if="!parStore.vc.is_prod">block-leftImageInfoContainer</button>
     <draggable
-        class="dragArea list-group"
+        class="dragArea list-group flex"
         :list="ctx.com_list"
         group="leftImageInfo"
     >
@@ -20,6 +20,7 @@ export  default  {
     return {
       parStore:ex.vueParStore(this),
       childStore:childStore,
+      blockEditorStore:ex.vueAssign(this,{name:'blockEditorStore'})
       // com_list:[ ],
     }
   },
