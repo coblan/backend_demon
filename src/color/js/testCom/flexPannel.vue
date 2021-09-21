@@ -4,7 +4,7 @@
         class="dragArea list-group"
         :list="com_list"
         :group="{ name: 'flexPannel', pull: 'clone', put: false }"
-        :clone="cloneDog"
+        :clone="cloneNode"
     >
       <div
           class="list-group-item"
@@ -18,11 +18,10 @@
   </div>
 </template>
 <script>
-
+import blockSettingMix from "./blockSettingMix.js";
 export  default  {
   props:['ctx'],
   data(){
-    debugger
     return {
       com_list:[
         {'editor':'block-colorDiv','label':'colorDiv',row:{}}
@@ -37,13 +36,14 @@ export  default  {
       }
     }
   },
+  mixins:[blockSettingMix],
   methods:{
-    cloneDog(node){
-      this.ctx.genVc.parStore.count +=1
-      var node1= ex.copy(node)
-      node1.index= this.ctx.genVc.parStore.count
-      return node1
-    }
+    // cloneNode(node){
+    //   this.ctx.genVc.parStore.count +=1
+    //   var node1= ex.copy(node)
+    //   node1.index= this.ctx.genVc.parStore.count
+    //   return node1
+    // }
   }
 }
 </script>

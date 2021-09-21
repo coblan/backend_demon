@@ -26,6 +26,7 @@ export  default  {
   components:{
     draggable
   },
+
   data(){
     var parStore = ex.vueParStore(this)
     return {

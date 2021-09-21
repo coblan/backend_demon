@@ -38,7 +38,7 @@ export  default  {
         ],
         row:self.ctx.lay_row,
         ops:[
-          {'editor':'com-btn','label':'确定','click_express':'debugger;scope.ps.vc.ctx.genVc.save_row(scope.ps.vc.row);scope.ps.vc.$emit("finish")'}
+          {'editor':'com-btn','label':'确定','click_express':'scope.ps.vc.ctx.genVc.save_row(scope.ps.vc.row);scope.ps.vc.$emit("finish")'}
         ],
         genVc:self
       }

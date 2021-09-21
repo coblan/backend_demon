@@ -18,6 +18,8 @@
   </div>
 </template>
 <script>
+import blockSettingMix from "./blockSettingMix.js";
+
 export  default  {
   props:['ctx'],
   data(){
@@ -40,13 +42,14 @@ export  default  {
       }
     }
   },
+  mixins:[blockSettingMix],
   methods:{
-    cloneDog(node){
-      this.ctx.genVc.blockEditorStore.count +=1
-      var node1= ex.copy(node)
-      node1.index= this.ctx.genVc.blockEditorStore.count
-      return node1
-    },
+    // cloneDog(node){
+    //   this.ctx.genVc.blockEditorStore.count +=1
+    //   var node1= ex.copy(node)
+    //   node1.index= this.ctx.genVc.blockEditorStore.count
+    //   return node1
+    // },
     getData(row){
       cfg.show_load()
       ex.director_call('get_today_info',{}).then(resp=>{
