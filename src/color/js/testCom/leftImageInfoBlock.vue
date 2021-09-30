@@ -20,12 +20,14 @@ export  default  {
     leftImgInfo
   },
   data(){
+    debugger
     return {
       parStore:ex.vueParStore(this),
     }
   },
   methods:{
     open_config(){
+      debugger
       ex.vueAssign(this.ctx.lay_row,this.parStore.vc.ctx.lay_row)
       var self =this
       var fields_ctx ={
@@ -46,6 +48,7 @@ export  default  {
 
     },
     save_row(row){
+      debugger
       ex.vueAssign(this.ctx.lay_row,row)
       // Vue.set(this.ctx.lay_row,'myfield',row.myfield)
       // Vue.set(this.ctx.lay_row,'myfield',row.myfield)
