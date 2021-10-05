@@ -1,59 +1,53 @@
 <template>
-<!--  <div class="flex-div" @drop="drop_handler" @dragenter="drag_enter" @dragover.prevent @dragleave="drag_leave">-->
-  <div>
-    flex-div {{name}}
-    <component :is="item.editor" v-for="item in com_list"></component>
-    <component  class="fake-com" v-if="next_com" :is="next_com.editor" key="__next_com"></component>
+  <div class="flex-div">
+    <button @click="open_config" v-if="!parStore.vc.is_prod">flex Dive {{name}}</button>
+    <draggable v-if="! parStore.vc.is_prod"
+        :list="ctx.com_list"
+        :disabled="false"
+        class="list-group"
+        ghost-class="ghost"
+        group="flexPannel"
+        @start="dragging = true"
+        @end="dragging = false"
+    >
+      <componet :is="item.editor" v-for="item in ctx.com_list" :ctx="item" :key="item.index"></componet>
+    </draggable>
+    <div class="list-group" v-else>
+      <componet :is="item.editor" v-for="item in ctx.com_list" :ctx="item" :key="item.index"></componet>
+    </div>
   </div>
 </template>
 <script>
-var count =1
+import draggable from "vuedraggable"
+import flexPannel from "./flexPannel.vue";
+
 export  default  {
+  props:['ctx'],
+  components:{
+    draggable
+  },
+
   data(){
-    count +=1
+    var parStore = ex.vueParStore(this)
     return {
-      com_list:[],
-      next_com:{},
-      name:count
+      name:this.ctx.index,
+      parStore:parStore,
     }
   },
   methods:{
-    drop_handler(ev) {
-      ev.preventDefault();
-      var data = ev.dataTransfer.getData('Text')
-      this.com_list.push((JSON.parse(data)))
-      this.next_com ={}
-      window._drag_data ={}
-      ev.stopPropagation()
-    },
-    drag_enter(ev){
-      console.log('enter')
-      ev.preventDefault();
-      // ev.stopPropagation()
-      // if(window._drag_data){
-      //   this.next_com = window._drag_data
-      // }
-
-    },
-    drag_over(ev){
-      ev.preventDefault();
-      ev.stopPropagation()
-      console.log('ff over')
-    },
-    drag_leave(ev){
-      this.next_com ={}
-      ev.preventDefault();
-    },
+    open_config(){
+      debugger
+      cfg.pop_vue_com(flexPannel,{genVc:this},{shade:0,maxmin: true,offset:'rt',area:['500px','500px']})
+    }
   }
 }
 </script>
 <style scoped lang="scss">
 .flex-div{
-  display: flex;
-  border: 1px solid #e8e6e6;
-  min-height: 50px;
+  border: 1px solid #c9c8c8;
+  .list-group{
+    display: flex;
+    flex-direction: row;
+  }
 }
-//.fake-com{
-//  pointer-events: none;
-//}
 </style>

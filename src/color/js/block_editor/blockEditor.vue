@@ -40,7 +40,7 @@ export  default  {
   data(){
     var childStore = new Vue()
     childStore.vc = this
-    childStore.count =1
+    // childStore.count =1
     childStore.name='blockEditorStore'
     return {
       com_list:[],
@@ -53,14 +53,15 @@ export  default  {
       if(resp){
         var bb = JSON.parse(resp)
         this.com_list =bb.com_list
-        this.childStore.count = bb.count
+        // this.childStore.count = bb.count
+        ex.count = bb.count
       }
     })
   },
   methods:{
     save_com_list(){
       cfg.show_load()
-      var bb = {com_list:this.com_list,count:this.childStore.count}
+      var bb = {com_list:this.com_list,count:ex.count}
       var post_data= JSON.stringify(bb)
       ex.director_call('save_test_com_list',{com_list:post_data}).then(resp=>{
         cfg.hide_load()

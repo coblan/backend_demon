@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import blockEditor from './block_editor/blockEditor.vue'
+import blockEditor from './block_editor/blockEditor2.vue'
 export  default  {
   components:{
     blockEditor

@@ -4,8 +4,8 @@
         class="dragArea list-group"
         :list="com_list"
         :group="{ name: 'leftImageInfo', pull: 'clone', put: false }"
-        :clone="cloneDog"
     >
+<!--      :clone="cloneDog"-->
       <div
           class="list-group-item"
           v-for="element in com_list"

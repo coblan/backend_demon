@@ -14,4 +14,6 @@ def get_today_info():
     return {
         'sheep':100,
         'chicken':300,
+        'dog':200,
+        'boy':100,
     }

@@ -1,25 +1,16 @@
 <template>
   <div>
-    <draggable
-        class="dragArea list-group"
-        :list="com_list"
-        :group="{ name: 'flexPannel', pull: 'clone', put: false }"
-        :clone="cloneNode"
-    >
-      <div
-          class="list-group-item"
-          v-for="element in com_list"
-          :key="element.editor"
-      >
-        {{ element.label }}
-      </div>
-    </draggable>
+    <comBasket :com-list="com_list" group-name="flexPannel"></comBasket>
     <com-form-one :ctx="fields_ctx"></com-form-one>
   </div>
 </template>
 <script>
 import blockSettingMix from "./blockSettingMix.js";
+import comBasket  from "./comBasket.vue";
 export  default  {
+  components:{
+    comBasket
+  },
   props:['ctx'],
   data(){
     return {
@@ -36,14 +27,8 @@ export  default  {
       }
     }
   },
-  mixins:[blockSettingMix],
   methods:{
-    // cloneNode(node){
-    //   this.ctx.genVc.parStore.count +=1
-    //   var node1= ex.copy(node)
-    //   node1.index= this.ctx.genVc.parStore.count
-    //   return node1
-    // }
+
   }
 }
 </script>

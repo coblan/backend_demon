@@ -1,42 +1,39 @@
 <template>
-  <div class="flex-div">
-    <button @click="open_config" v-if="!parStore.vc.is_prod">flex Dive {{name}}</button>
-    <draggable v-if="! parStore.vc.is_prod"
-        :list="ctx.com_list"
-        :disabled="false"
-        class="list-group"
-        ghost-class="ghost"
-        group="flexPannel"
-        @start="dragging = true"
-        @end="dragging = false"
-    >
-      <componet :is="item.editor" v-for="item in ctx.com_list" :ctx="item" :key="item.index"></componet>
-    </draggable>
-    <div class="list-group" v-else>
-      <componet :is="item.editor" v-for="item in ctx.com_list" :ctx="item" :key="item.index"></componet>
-    </div>
-  </div>
+<!--  <div class="flex-div">-->
+    <comDragableContainer :com-list="ctx.com_list"
+                          group-name="flexPannel"
+                          title="flexDiv"
+                          :com-options="opitons"
+                          :configHeads="config_heads"
+                          :row.sync="ctx.row"
+                          >
+<!--      @pop-config="open_config"-->
+    </comDragableContainer>
+<!--  </div>-->
 </template>
 <script>
-import draggable from "vuedraggable"
 import flexPannel from "./flexPannel.vue";
-
+import comDragableContainer from "./comDragableContainer.vue";
 export  default  {
   props:['ctx'],
   components:{
-    draggable
+    comDragableContainer
   },
-
   data(){
-    var parStore = ex.vueParStore(this)
     return {
       name:this.ctx.index,
-      parStore:parStore,
+      opitons:[
+        {'editor':'block-colorDiv','label':'colorDiv',row:{}}
+      ],
+      config_heads:[
+        {'name':'data_src','label':'数据源','editor':'com-field-linetext'},
+      ]
+
     }
   },
   methods:{
     open_config(){
-      cfg.pop_vue_com(flexPannel,{genVc:this},{shade:0,maxmin: true,offset:'rt',area:['500px','500px']})
+      // cfg.pop_vue_com(flexPannel,{genVc:this},{shade:0,maxmin: true,offset:'rt',area:['500px','500px']})
     }
   }
 }

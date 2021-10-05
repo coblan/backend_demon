@@ -1,2 +1,2 @@
-import blockEditor from './blockEditor.vue'
+import blockEditor from './blockEditor2.vue'
 Vue.component('com-block-editor',blockEditor)
