@@ -49,7 +49,7 @@ export  default  {
   },
   computed:{
     edit(){
-      return this.rootStore.vc.is_prod
+      return !this.rootStore.vc.is_prod
     }
   },
   methods:{

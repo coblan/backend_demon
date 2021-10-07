@@ -11,7 +11,7 @@ class BlockEditorBuilder(object):
         return {
             'editor':'block-editor-page',
             'editor_ctx':{
-                
+                'prod':True,
             }
         }
     

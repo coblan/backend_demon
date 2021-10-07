@@ -1,7 +1,10 @@
 <template>
   <div>
-    <button @click="is_prod = !is_prod">切换</button>
-    <button @click="save_com_list">保存</button>
+    <template v-if="show_head_button">
+      <button @click="is_prod = !is_prod">切换</button>
+      <button @click="save_com_list">保存</button>
+    </template>
+
     <comDragableContainer
         :com-list="com_list"
         group-name="blockEditor"
@@ -22,15 +25,19 @@ export  default  {
   components:{
     comDragableContainer
   },
+  props:{
+    prod:{},
+  },
   data(){
+    debugger
     var self = this
-
     var childStore = new Vue()
     childStore.vc = this
     childStore.name='blockEditorStore'
     return {
       row:{},
-      is_prod:true,
+      show_head_button:!this.prod,
+      is_prod:this.prod,
       com_list:[ ],
       parStore:ex.vueParStore(this),
       childStore:childStore,

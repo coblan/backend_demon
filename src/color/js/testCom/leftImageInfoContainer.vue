@@ -32,7 +32,7 @@ export  default  {
     return {
       parStore:ex.vueParStore(this),
       childStore:childStore,
-      // blockEditorStore:ex.vueParStore(this,{name:'blockEditorStore'}),
+      blockEditorStore:ex.vueParStore(this,{name:'blockEditorStore'}),
       com_options:[
         {'editor':'block-leftImageInfo','label':'leftImageInfo',row:{}},
       ],
@@ -40,18 +40,24 @@ export  default  {
         {'name':'data_src','label':'数据源','editor':'com-field-linetext'},
       ],
       append_ops:[
-        {'editor':'com-btn','label':'获取数据','click_express':'debugger;var pp = ex.vueParStore(scope.vc,{name:"leftImageInfoContainer"});pp.vc.getData(scope.ps.vc.row)'},
+        {'editor':'com-btn','label':'获取数据','click_express':'debugger;var pp = ex.vueParStore(scope.vc,{name:"leftImageInfoContainer"});pp.vc.getData()'},
       ]
       // com_list:[ ],
     }
   },
+  mounted(){
+    if(this.blockEditorStore.vc.is_prod){
+      this.getData()
+    }
+  },
   methods:{
-    getData(row){
-      cfg.show_load()
+    getData(){
+      this.ctx.row.data_resp = {}
+      // cfg.show_load()
       ex.director_call('get_today_info',{}).then(resp=>{
-        row.data_resp = resp
+        // row.data_resp = resp
         this.ctx.row.data_resp = resp
-        cfg.hide_load()
+        // cfg.hide_load()
       })
     },
     removeSelf(){
