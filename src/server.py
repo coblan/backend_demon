@@ -18,11 +18,10 @@ def start():
     
 if __name__ == '__main__':
     import webview
-    webview.create_window('Hello world', 'http://localhost:8077')
-     
-     
     thread = threading.Thread(target=start)
     thread .start()
+    
+    webview.create_window('Hello world', 'http://localhost:8077')
     webview.start()  
     os.kill(os.getpid(), signal.SIGINT)
     #glob['serve'].shutdown()
