@@ -47,7 +47,7 @@ class PcMenu(BaseEngine):
                  {'label': '微信用户', 'url': page('wxuserinfo'), 'visible': can_touch(Group, crt_user)},
                  {'label': '账号管理', 'url': page('jb_user'), 'visible': can_touch(User, crt_user)},
                  {'label': '权限分组', 'url': page('jb_group'), 'visible': can_touch(Group, crt_user)},
-                  
+                   {'label': '临时数据', 'url': page('myjson'), 'visible': can_touch(Group, crt_user)},
                  
              ]},
 
