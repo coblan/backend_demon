@@ -1,4 +1,4 @@
-from helpers.director.shortcut import FieldsPage,director,Fields,page_dc
+from helpers.director.shortcut import FieldsPage,director,Fields,page_dc,director_view
 from helpers.director.kv import get_value,set_value
 
 class MyJsonPage(FieldsPage):
@@ -22,6 +22,9 @@ class MyJsonPage(FieldsPage):
         def save_form(self):
             set_value('my-json',self.kw.get('content'))
         
+@director_view('myjson/value')
+def getMyjson():
+    return get_value('my-json')
 
 director.update({
     'myjson':MyJsonPage.fieldsCls
