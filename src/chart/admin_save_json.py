@@ -1,4 +1,4 @@
-from helpers.director.shortcut import FieldsPage,director,Fields,page_dc,director_view
+from helpers.director.shortcut import FieldsPage,director,Fields,page_dc,director_view,get_request_cache
 from helpers.director.kv import get_value,set_value
 
 class MyJsonPage(FieldsPage):
@@ -25,6 +25,10 @@ class MyJsonPage(FieldsPage):
 @director_view('myjson/value')
 def getMyjson():
     return get_value('my-json')
+
+@director_view('myjson/save')
+def getMyjson(text):
+    return set_value('my-json',text)
 
 director.update({
     'myjson':MyJsonPage.fieldsCls
