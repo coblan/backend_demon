@@ -31,6 +31,8 @@ class PcMenu(BaseEngine):
              'submenu': [
                 {'label':'人员', 'url': page('employee'), },
                 {'label':'部门', 'url': page('department'), },
+                {'label':'部门2', 'url': page('department2'), },
+                
              ]},
             {'label':'色彩图片','icon':fa('fa-dashboard'),
              'submenu':[
