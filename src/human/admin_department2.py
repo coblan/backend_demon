@@ -1,7 +1,7 @@
 from helpers.director.shortcut import page_dc,director,ModelFields,ModelTable,TablePage,director_view
 from .models import TBDepartment
 from helpers.director.model_func.dictfy import to_dict
-from django.db.models import Count,F,OuterRef, Subquery
+from django.db.models import Count,F,OuterRef, Subquery,Exists
 
 
 class DepartmentPage(TablePage):
@@ -15,8 +15,9 @@ class DepartmentPage(TablePage):
         model = TBDepartment
         exclude = []
  
-        hide_fields=['parent','path']
+        hide_fields=['parent','path','id']
         pop_edit_fields = ['name']
+        selectable = False
 
         #def dict_head(self, head):
             #if head['name'] == 'name':
@@ -25,31 +26,40 @@ class DepartmentPage(TablePage):
                 #head['action'] ='scope.ps.search_args.parent = scope.row.pk;scope.ps.search()'
             #return head
             
+        def dict_head(self, head):
+            width = {
+                'name':200
+            }
+            head['width'] = width.get(head['name'])
+            return head
+            
         def inn_filter(self, query):
             if self.kw.get('par'):
                 query  =query.filter(parent_id = self.kw.get('par'))
             else:
                 query = query.filter(parent__isnull = True)
+            subquery = TBDepartment.objects.filter(parent=OuterRef('pk'))
+            query = query.annotate(hasChildren=Exists(subquery))
             return query
 
-        def getParents(self):
-            ls =[]
-            par_pk = self.kw.get('parent',-1)
-            if par_pk >= 0 :
-                parent = TBDepartment.objects.get(pk = par_pk)
-                while True:
-                    ls.append({'value':parent.pk,'label':str(parent)})
-                    if parent.parent:
-                        parent = parent.parent
-                    else:
-                        break
-            ls.append({'value':-1,'label':'公司'})
-            ls.reverse()
-            return ls
+        #def getParents(self):
+            #ls =[]
+            #par_pk = self.kw.get('parent',-1)
+            #if par_pk >= 0 :
+                #parent = TBDepartment.objects.get(pk = par_pk)
+                #while True:
+                    #ls.append({'value':parent.pk,'label':str(parent)})
+                    #if parent.parent:
+                        #parent = parent.parent
+                    #else:
+                        #break
+            #ls.append({'value':-1,'label':'公司'})
+            #ls.reverse()
+            #return ls
         
         def dict_row(self, inst):
             return {
-                'hasChildren':True,               
+                'hasChildren':inst.hasChildren,               
             }
         #def get_operation(self):
             #ops = super().get_operation()
