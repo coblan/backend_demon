@@ -25,12 +25,34 @@ class DepartmentPage(TablePage):
                 #head['width'] = 200
                 #head['action'] ='scope.ps.search_args.parent = scope.row.pk;scope.ps.search()'
             #return head
+        
+        def getExtraHead(self):
             
+            return [
+                {'name':'op','label':'操作','editor':'com-table-ops-cell',
+                 'ops':[
+                      {'editor':'com-btn', 
+                       'label':'创建',
+                       'width':100,
+                       #'icon':'el-icon-phone',
+                       #'fa_icon':'fa fa-phone-square',
+                       'type':'primary',
+                       #'shape':'circle',
+                       'css':'.myphone button{ padding: 2px;}',
+                       'class':'myphone',
+                       'fields_ctx':DepartmentForm().get_head_context(),
+                       'click_express':"debugger;scope.head.fields_ctx.preset={parent:scope.ps.vc.rowData.pk}; cfg.pop_vue_com('com-form-one',scope.head.fields_ctx).then(()=>{ scope.ps.vc.parStore.vc.$refs.dtable.updateNode( scope.ps.vc.rowData) })"}
+                 ]}
+            ]
+        
         def dict_head(self, head):
             width = {
                 'name':200
             }
             head['width'] = width.get(head['name'])
+            if head['name']=='name':
+                head['class']='chuizhi'
+                head['css']='''.chuizhi:first-child{margin-left:23px}'''
             return head
             
         def inn_filter(self, query):
@@ -125,7 +147,8 @@ class DepartmentForm(ModelFields):
         super().__init__(*args, **kw)
         if not self.instance.pk and self.kw.get('parent'):
             self.instance.parent = TBDepartment.objects.get(pk = self.kw.get('parent'))
-
+    
+    
     def after_save(self):
         if not self.instance.parent and not self.instance.path:
             self.instance.path='/%s'%self.instance.pk
