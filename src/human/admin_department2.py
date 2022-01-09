@@ -41,7 +41,7 @@ class DepartmentPage(TablePage):
                        'css':'.myphone button{ padding: 2px;}',
                        'class':'myphone',
                        'fields_ctx':DepartmentForm().get_head_context(),
-                       'click_express':"debugger;scope.head.fields_ctx.preset={parent:scope.ps.vc.rowData.pk}; cfg.pop_vue_com('com-form-one',scope.head.fields_ctx).then(()=>{ scope.ps.vc.parStore.vc.$refs.dtable.updateNode( scope.ps.vc.rowData) })"}
+                       'click_express':"scope.head.fields_ctx.preset={parent:scope.ps.vc.rowData.pk}; cfg.pop_vue_com('com-form-one',scope.head.fields_ctx).then(()=>{ scope.ps.vc.rowData.hasChildren=true;scope.ps.vc.parStore.vc.$refs.dtable.updateNode( scope.ps.vc.rowData) })"}
                  ]}
             ]
         
