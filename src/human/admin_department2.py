@@ -70,17 +70,44 @@ class DepartmentPage(TablePage):
                     
                  });''',
                        },
-                      {'editor':'com-btn',
-                       'label':'剪切',
-                       'width':100,
-                       'type':'danger',
+                      #{'editor':'com-btn',
+                       #'label':'剪切',
+                       #'width':100,
+                       #'type':'danger',
+                       #'class':'myphone',
+                       #'click_express':''},
+                      #{'editor':'com-btn',
+                       #'label':'粘贴',
+                       #'type':'danger',
+                       #'class':'myphone',
+                       #'click_express':''
+                       #},
+                      {'editor':'com-btn-drop',
+                       'label':'更多',
                        'class':'myphone',
-                       'click_express':''},
-                      {'editor':'com-btn',
-                       'label':'粘贴',
-                       'type':'danger',
-                       'class':'myphone',
-                       'click_express':''
+                       'menu':[
+                           {'label':'剪切','click_express':'var row=scope.ps.vc.rowData;window.cut_data=row;cfg.toast("剪切成功")'},
+                           {'label':'粘贴','click_express':'''
+                           var row = window.cut_data;
+                           var old_parent_pk = row.parent
+                           var new_parent=scope.ps.vc.rowData;
+                           row.parent=new_parent.pk; 
+                           ex.director_call('d.save_row',{row:row}).then(()=>{
+                               scope.ps.vc.parStore.vc.$refs.dtable.updateNode( {pk:old_parent_pk})
+                               new_parent.hasChildren=true
+                               scope.ps.vc.parStore.vc.$refs.dtable.updateNode( {pk:new_parent.pk})
+                           })''' },
+                           {'label':'移到顶层',
+                            'click_express':'''
+                            var row=scope.ps.vc.rowData;
+                            var old_parent_pk = row.parent
+                            row.parent=null;
+                            ex.director_call('d.save_row',{row:row}).then(()=>{
+                               scope.ps.vc.parStore.vc.$refs.dtable.updateNode( {pk:old_parent_pk})
+                               scope.ps.vc.parStore.vc.search()
+                           })
+                            '''}
+                       ]
                        }
                  ]}
             ]
@@ -88,7 +115,7 @@ class DepartmentPage(TablePage):
         def dict_head(self, head):
             width = {
                 'name':200,
-                'op':100,
+                'op':150,
             }
             head['width'] = width.get(head['name'])
             if head['name']=='name':
