@@ -70,6 +70,18 @@ class DepartmentPage(TablePage):
                     
                  });''',
                        },
+                      {'editor':'com-btn',
+                       'label':'剪切',
+                       'width':100,
+                       'type':'danger',
+                       'class':'myphone',
+                       'click_express':''},
+                      {'editor':'com-btn',
+                       'label':'粘贴',
+                       'type':'danger',
+                       'class':'myphone',
+                       'click_express':''
+                       }
                  ]}
             ]
         
