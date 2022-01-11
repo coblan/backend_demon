@@ -37,17 +37,46 @@ class DepartmentPage(TablePage):
                        #'icon':'el-icon-phone',
                        #'fa_icon':'fa fa-phone-square',
                        'type':'primary',
-                       #'shape':'circle',
                        'css':'.myphone button{ padding: 2px;}',
                        'class':'myphone',
                        'fields_ctx':DepartmentForm().get_head_context(),
-                       'click_express':"scope.head.fields_ctx.preset={parent:scope.ps.vc.rowData.pk}; cfg.pop_vue_com('com-form-one',scope.head.fields_ctx).then(()=>{ scope.ps.vc.rowData.hasChildren=true;scope.ps.vc.parStore.vc.$refs.dtable.updateNode( scope.ps.vc.rowData) })"}
+                       'click_express':"scope.head.fields_ctx.preset={parent:scope.ps.vc.rowData.pk}; cfg.pop_vue_com('com-form-one',scope.head.fields_ctx).then(()=>{ scope.ps.vc.rowData.hasChildren=true;scope.ps.vc.parStore.vc.$refs.dtable.updateNode( scope.ps.vc.rowData) })"},
+                      {'editor':'com-btn',
+                       'label':'删除',
+                       'width':100,
+                       'type':'warning',
+                       'class':'myphone',
+                       'click_express':'''
+                       cfg.show_load();
+                       ex.director_call("d.delete_query_related",{rows:[scope.ps.vc.rowData]}).then((resp)=>{
+                     cfg.hide_load();
+                     if(resp.length>0){
+                         cfg.pop_vue_com("com-pan-delete-query-message",{msg_list:resp,genStore:scope.ps,title:"删除关联确认"})
+                     }else{
+                        cfg.confirm("确认删除?").then(()=>{
+                            cfg.show_load()
+                            return ex.director_call('d.delete_rows',{rows:[scope.ps.vc.rowData]})
+                          }).then(()=>{
+                            cfg.hide_load()
+                            if(scope.ps.vc.rowData.parent){
+                                scope.ps.vc.parStore.vc.$refs.dtable.updateNode( {pk:scope.ps.vc.rowData.parent})
+                            }else{
+                                scope.ps.vc.parStore.vc.search()
+                            }
+                            
+                          })
+                        
+                     }
+                    
+                 });''',
+                       },
                  ]}
             ]
         
         def dict_head(self, head):
             width = {
-                'name':200
+                'name':200,
+                'op':100,
             }
             head['width'] = width.get(head['name'])
             if head['name']=='name':
