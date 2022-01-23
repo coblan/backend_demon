@@ -65,6 +65,26 @@ class PcMenu(BaseEngine):
         ctx['extra_js'].append('color')
 
         return ctx
+    
+
+    def get_head_bar_data(self, request):
+        dc = super().get_head_bar_data(request)
+        header_bar_widgets = dc.get('header_bar_widgets')
+
+        if True:
+            count =  12
+            header_bar_widgets = [
+                {'editor': 'com-head-bell-msg', 
+                 'link':'/pc/system_message',
+                 'count':count,
+                 #'lasttime':timezone.now().strftime('%Y-%m-%d %H:%M:%S'),
+                   },
+            ] + header_bar_widgets
+            dc['header_bar_widgets'] = header_bar_widgets
+        dc['left_header_bar_widgets' ]=[
+            {'editor':'com-historypage','name':'history'}
+        ]
+        return dc 
 
 
 PcMenu.add_pages(page_dc)
