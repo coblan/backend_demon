@@ -82,7 +82,7 @@ class PcMenu(BaseEngine):
             ] + header_bar_widgets
             dc['header_bar_widgets'] = header_bar_widgets
         dc['left_header_bar_widgets' ]=[
-            {'editor':'com-historypage','name':'history'}
+            {'editor':'com-historypage','name':'history','show_history':False}
         ]
         return dc 
 
