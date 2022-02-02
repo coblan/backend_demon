@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'human',
     'color',
     'chart',
+    'helpers.case.tab_admin',
 ]
 
 MIDDLEWARE = [

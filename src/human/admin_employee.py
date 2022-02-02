@@ -15,7 +15,7 @@ class EmployeePage(TablePage):
         return '员工管理'
     
     def get_template(self, prefer=None):
-        return 'jb_admin/table.html'
+        return 'jb_admin/table_new.html'
     
     class tableCls(ModelTable):
         model = TBEmployee
