@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url,include
 from django.contrib import admin
 from helpers.authuser.engin_view import AuthEngine
-from hello.engin_menu import PcMenu
+from hello.engin_menu import PcMenu,TabEngin
 from helpers.director.views import director_view
 from django.conf import settings
 from django.views.generic import RedirectView 
@@ -26,6 +26,8 @@ urlpatterns = [
     #url(r'^admin/', admin.site.urls),
     url(r'^accounts/([\w\.]+)/?$',AuthEngine.as_view(),name=AuthEngine.url_name),
     url(r'^pc/([\w\.]+)/?$',PcMenu.as_view(),name=PcMenu.url_name),
+    url(r'^tab/([\w\.]+)/?$',TabEngin.as_view(),name=TabEngin.url_name),
+    
     url(r'^dapi/(?P<director_name>[\w\/\.-]+)?/?$',director_view),
     url(r'^d/',include('helpers.director.urls'),name='director'),
     url(r'^$',RedirectView.as_view(url='/pc/enginhome')) ,

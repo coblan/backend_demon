@@ -5,7 +5,8 @@ class BlockEditorBuilder(object):
         pass
     
     def get_template(self):
-        return 'tab_admin/base.html'
+        #return 'tab_admin/base.html'
+        return 'tab_admin/index.html'
     
     def get_context(self):
         return {
@@ -14,6 +15,9 @@ class BlockEditorBuilder(object):
                 
             }
         }
+
+
+
     
 page_dc.update({
     'taball':BlockEditorBuilder

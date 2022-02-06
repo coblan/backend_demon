@@ -55,6 +55,15 @@ def get_palette():
         rows.append(sim_dict(inst,filt_attr=dc))
     return rows
 
+@director_view('real/palette')
+def real_palette_ctx():
+    dc = PalettePage.tableCls().get_context()
+    dc.update({
+        'editor':'com-backend-table',
+    } ) 
+    return dc
+    
+
 director.update({
     'palette':PalettePage.tableCls,
     'palette.edit':PaletteForm

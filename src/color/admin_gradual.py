@@ -1,10 +1,16 @@
 from .admin_palette import PalettePage,PaletteForm
-from helpers.director.shortcut import page_dc,director
+from helpers.director.shortcut import page_dc,director,director_view
 
 class GradualPage(PalettePage):
     class tableCls(PalettePage.tableCls):
         def inn_filter(self, query):
             return query.filter(kind =1)
+        
+        def dict_head(self, head):
+            head = super().dict_head(head)
+            if head['name'] =='id':
+                head['click_express']='''live_root.addTab({name:"grandual.edit_"+scope.row.pk,label:scope.row._label,row:scope.row,editor:"com-lazy-wrap",lazy_director_name:"lazy/grandul.edit"})'''
+            return head
 
 class GradualForm(PaletteForm):
     
@@ -23,6 +29,22 @@ class GradualForm(PaletteForm):
         return head
     def clean_save(self):
         self.instance.kind =1
+
+@director_view('lazy/grandul')
+def gradual_ctx():
+    dc = GradualPage.tableCls().get_context()
+    dc.update({
+        'editor':'com-backend-table',
+    } ) 
+    return dc
+
+@director_view('lazy/grandul.edit')
+def gradual_ctx():
+    dc = GradualForm().get_head_context()
+    dc.update({
+        'editor':'com-form-one',
+    } ) 
+    return dc
 
 director.update({
     'gradual':GradualPage.tableCls,
