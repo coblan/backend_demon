@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'human',
     'color',
     'chart',
+    'ui_editor',
 ]
 
 MIDDLEWARE = [

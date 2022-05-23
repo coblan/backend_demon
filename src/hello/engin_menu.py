@@ -46,6 +46,13 @@ class PcMenu(BaseEngine):
             
             {'label':'构建器','url':page('blockeditor'),'icon': fa('fa-users')},
             
+            {'label':'页面管理','icon':fa('fa-dashboard'),
+             'submenu':[
+                 {'label':'页面管理','url':page('webpage')},
+    
+                 ]},            
+            
+            
             {'label': '系统管理', 'icon': fa('fa-gear'), 'visible': True,
              'submenu': [
                  {'label': '微信用户', 'url': page('wxuserinfo'), 'visible': can_touch(Group, crt_user)},
@@ -63,7 +70,7 @@ class PcMenu(BaseEngine):
         if 'extra_js' not in ctx:
             ctx['extra_js'] = []
         ctx['extra_js'].append('color')
-
+        ctx['extra_js'].append('ui_editor')
         return ctx
     
 
