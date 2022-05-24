@@ -26,8 +26,13 @@ export default {
   },
   methods:{
     async getComponents(){
-      var resp = await ex.director_get('uieditor/components/all')
-      this.coms_options=resp
+      // var resp = await ex.director_get('uieditor/components/all')
+      // this.coms_options=resp
+      
+      for(var k in cfg.uicoms){
+        this.coms_options.push({value:cfg.uicoms[k],label:cfg.uicoms[k].label})
+      }
+
     },
     async add(){
 

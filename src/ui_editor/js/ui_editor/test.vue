@@ -9,11 +9,12 @@ export default {
     text:{}
   },
   methods:{
-    getFields(){
-      return [
-        {name:'text',label:'ss',editor:'com-field-linetext'}
-      ]
-    }
   },
+  label:'测试组件',
+  fields(){
+    return [
+      {name:'text',label:'ss',editor:'com-field-linetext'}
+    ]
+  }
 }
 </script>

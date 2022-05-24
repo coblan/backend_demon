@@ -21,7 +21,6 @@ export default {
     }
   },
   data(){
-    debugger
     return {}
   },
   methods:{
